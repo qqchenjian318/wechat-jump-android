@@ -3,8 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
-      <module fileurl="file://E:\andy\hubSpace\wechat-jump-android\app\app.iml" filepath="E:\andy\hubSpace\wechat-jump-android\app\app.iml" />
-      <module fileurl="file://$PROJECT_DIR$/wechat-jump-android.iml" filepath="$PROJECT_DIR$/wechat-jump-android.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/wechat-jump-android.iml" filepath="$PROJECT_DIR$/.idea/modules/wechat-jump-android.iml" />
     </modules>
   </component>
 </project>

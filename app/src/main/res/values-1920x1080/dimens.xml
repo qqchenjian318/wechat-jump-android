@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="press_coefficient">1.392</dimen><!--按压系数-->
+    <dimen name="piece_body_width">70</dimen><!--按压系数-->
+    <dimen name="piece_base_height_1_2">20</dimen><!--按压系数-->
+</resources>
