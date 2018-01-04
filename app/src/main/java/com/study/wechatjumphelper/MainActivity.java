@@ -1,25 +1,42 @@
 package com.study.wechatjumphelper;
 
+import android.content.Context;
+import android.content.Intent;
+import android.media.projection.MediaProjectionManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
+import com.study.wechatjumphelper.service.JumpService;
+
 public class MainActivity extends AppCompatActivity {
-    private String[] da = {"092000.png","091856.png","092055.png",
-            "092243.png","092422.png","092618.png","092749.png"};
+    private int result;
+    private Intent intent = null;
+    private int REQUEST_MEDIA_PROJECTION = 1;
+    MediaProjectionManager mMediaProjectionManager;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        mMediaProjectionManager = (MediaProjectionManager)getApplication().getSystemService(Context.MEDIA_PROJECTION_SERVICE);
+        startProjectionIntent();
+    }
+    public void startProjectionIntent(){
+        startActivityForResult(mMediaProjectionManager.createScreenCaptureIntent(), REQUEST_MEDIA_PROJECTION);
+    }
 
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                for (int i = 0; i < da.length; i++) {
-                    String testData = Constants.getPath("testData/", da[i]);
-                    JumpUtils.jumpJump(testData);
-                }
-
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if(requestCode==REQUEST_MEDIA_PROJECTION){
+            if(resultCode==RESULT_OK){
+                result=resultCode;
+                intent=data;
+                ((MyApplication)getApplication()).setMediaProjectionManager(mMediaProjectionManager);
+                ((MyApplication)getApplication()).setIntent(intent);
+                ((MyApplication)getApplication()).setResult(result);
+                Intent serIntent=new Intent(getApplicationContext(), JumpService.class);
+                startService(serIntent);
+                finish();
             }
-        }).start();
+        }
     }
 }
